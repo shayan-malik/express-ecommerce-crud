@@ -1,7 +1,7 @@
 import express from "express";
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 let products = [];
 
@@ -40,7 +40,6 @@ app.put("/edit-product/:id", (req, res) => {
     }
 
     products[productIndex] = {...products[productIndex], ...updatedBody };
-    
     res.status(200).send({ status: "success", message: "Product Updated Successfully", data: products[productIndex] });
     
     
