@@ -30,14 +30,14 @@ app.post("/add-product", (req, res) => {
 
 })
 
-app.put("/edit-product/:id", (req, res) => {
+app.put("/product/:id", (req, res) => {
     const productId = req.params.id;
     const updatedBody = req.body;
 
     const productIndex = products.findIndex((eachProduct) => eachProduct.id == productId);
 
     if(productIndex === -1){
-        res.status(404).send({ status: "success", message: "Product Not Found "});
+        res.status(404).send({ status: "error", message: "Product Not Found "});
         return;
     }
 
@@ -49,14 +49,15 @@ app.put("/edit-product/:id", (req, res) => {
 })
 
 
-app.delete("/delete-product/:id", (req, res) => {
+app.delete("/product/:id", (req, res) => {
     const productId = req.params.id;
     const productExist = products.find((eachProduct) => eachProduct.id == productId);
     if(!productExist){
-        res.send({ status: "error", message: "Product Not Found"})
+        res.status(404).send({ status: "error", message: "Product Not Found"});
+        return;
     }
     products = products.filter((eachProduct) => eachProduct.id != productId);
-    res.send({ status: "success", message: "Product Deleted Successfully" })
+    res.status(200).send({ status: "success", message: "Product Deleted Successfully" })
 })
 
 
