@@ -17,7 +17,6 @@ app.get("/products", (req, res) => {
     res.send({ status: "success", data: products });
 });
 
-// Reusable validation function
 const validateProduct = (body) => {
     const errors = {};
 
